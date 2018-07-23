@@ -16,25 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `balance`
---
-
-DROP TABLE IF EXISTS `balance`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `balance` (
-  `id` varchar(36) NOT NULL,
-  `id_card` varchar(45) DEFAULT NULL,
-  `last_topup` date DEFAULT NULL,
-  `balance` double DEFAULT NULL,
-  `acc_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_acc_id_idx` (`acc_id`),
-  CONSTRAINT `FK_acc_id` FOREIGN KEY (`acc_id`) REFERENCES `master_account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `master_account`
 --
 
@@ -86,6 +67,25 @@ CREATE TABLE `master_account` (
   `gender` varchar(255) DEFAULT NULL,
   `refresh_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `balance`
+--
+
+DROP TABLE IF EXISTS `balance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `balance` (
+  `id` varchar(36) NOT NULL,
+  `id_card` varchar(45) DEFAULT NULL,
+  `last_topup` date DEFAULT NULL,
+  `balance` double DEFAULT NULL,
+  `acc_id` varchar(36) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_acc_id_idx` (`acc_id`),
+  CONSTRAINT `FK_acc_id` FOREIGN KEY (`acc_id`) REFERENCES `master_account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
