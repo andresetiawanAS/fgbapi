@@ -48,6 +48,11 @@ public class AccountServiceImpl implements UserDetailsService, AccountService {
     }
 
     @Override
+    public Optional<Account> findByEmail(String email) {
+        return Optional.ofNullable(accountRepository.findByEmail(email));
+    }
+
+    @Override
     public Account updateById(String user) {
         return accountRepository.getOne(user);
     }

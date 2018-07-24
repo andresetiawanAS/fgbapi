@@ -10,5 +10,6 @@ public interface AccountService {
     List<Account> findAll();
     void delete(long id);
     Optional<Account> findById(String user);
+    Optional<Account> findByEmail(String email);
     Account updateById(String user);
 }

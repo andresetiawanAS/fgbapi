@@ -68,18 +68,27 @@ public class AccountController {
     @PostMapping("/loginlive")
     @CrossOrigin(origins = "*")
     public @ResponseBody ResponseEntity<ProjectStatus> loginAccountLive(@Valid @RequestBody Account account){
-        System.out.println("Ini adalah object account password : " + account.getPassword());
-        String encodePassword = hashPassword(account.getPassword());
-        System.out.println("Ini adalah encodePassword : " + account.getPassword());
-        int checkPassword = checkPass(account.getPassword(), encodePassword);
+        Optional<Account> user = accountService.findByEmail(account.getEmail());
 
-//        accountService.findById(account.getId());
-        if(checkPassword == 1){
-            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+
+        if (user.get().getEmail().equals(account.getEmail())){
+            System.out.println(user.get().getAcc_owner());
+//            System.out.println("Email untuk account : " + account.getEmail());
+//            System.out.println("Email untuk user : " + user.get().getEmail());
+//            System.out.println("Ini adalah object account password : " + account.getPassword());
+//            System.out.println("Ini adalah encodePassword : " + account.getPassword());
+
+            String encodePassword = hashPassword(account.getPassword());
+            int checkPassword = checkPass(account.getPassword(), encodePassword);
+
+            if(checkPassword == 1){
+                return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<ProjectStatus>(new ProjectStatus("Failed..."), HttpStatus.OK);
+            }
         }
-        else{
-            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Failed..."), HttpStatus.OK);
-        }
+        else return new ResponseEntity<ProjectStatus>(new ProjectStatus("Failed..."), HttpStatus.OK);
     }
 
     @GetMapping("/listacc")
