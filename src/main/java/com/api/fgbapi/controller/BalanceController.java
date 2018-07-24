@@ -33,10 +33,10 @@ public class BalanceController {
     @PutMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     ResponseEntity<ProjectStatus> saveBalance(@Valid @RequestBody Balance user) {
-        String uniqueID = UUID.randomUUID().toString();
-        user.setId(uniqueID);
+        String uniqueID = UUID.randomUUID().toString(); //generate random id
+        user.setId(uniqueID); //set random id ke setiap record balance yang dibuat
         balanceService.save(user);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK); //nandain insertnya success/ga
     }
 
     @GetMapping(value = "/all")

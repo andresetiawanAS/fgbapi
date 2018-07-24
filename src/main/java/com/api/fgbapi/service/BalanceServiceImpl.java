@@ -12,7 +12,7 @@ import java.util.Optional;
 public class BalanceServiceImpl implements BalanceService {
 
     @Autowired
-    BalanceRepository balanceRepository;
+    BalanceRepository balanceRepository; //inject properties yang ada di table balance buat dipake di service
 
     @Override
     public Balance save(Balance user) {
