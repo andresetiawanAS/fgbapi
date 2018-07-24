@@ -16,7 +16,7 @@ import java.util.Date;
 @JsonIgnoreProperties(value = {"last_topup"}, allowGetters = true)
 public class Balance implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     String id;
     String id_card;
     Double balance;

@@ -14,6 +14,7 @@ import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value="/balance", method = RequestMethod.GET)
@@ -32,7 +33,8 @@ public class BalanceController {
     @PutMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     ResponseEntity<ProjectStatus> saveBalance(@Valid @RequestBody Balance user){
-
+        String uniqueID = UUID.randomUUID().toString();
+        user.setId(uniqueID);
         balanceService.save(user);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
     }
