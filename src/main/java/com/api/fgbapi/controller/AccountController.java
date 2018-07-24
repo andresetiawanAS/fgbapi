@@ -68,9 +68,18 @@ public class AccountController {
     @PostMapping("/loginlive")
     @CrossOrigin(origins = "*")
     public @ResponseBody ResponseEntity<ProjectStatus> loginAccountLive(@Valid @RequestBody Account account){
-        System.out.println(account);
-        accountService.findById(account.getId());
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        System.out.println("Ini adalah object account password : " + account.getPassword());
+        String encodePassword = hashPassword(account.getPassword());
+        System.out.println("Ini adalah encodePassword : " + account.getPassword());
+        int checkPassword = checkPass(account.getPassword(), encodePassword);
+
+//        accountService.findById(account.getId());
+        if(checkPassword == 1){
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Failed..."), HttpStatus.OK);
+        }
     }
 
     @GetMapping("/listacc")
