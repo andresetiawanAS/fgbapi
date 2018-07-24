@@ -6,6 +6,7 @@ import com.api.fgbapi.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,7 +70,7 @@ public class AccountController {
     @CrossOrigin(origins = "*")
     public @ResponseBody ResponseEntity<ProjectStatus> loginAccountLive(@Valid @RequestBody Account account){
         Optional<Account> user = accountService.findByEmail(account.getEmail());
-
+//        user.orElseThrow(()-> new UsernameNotFoundException("Email not found!"));
 
         if (user.get().getEmail().equals(account.getEmail())){
 //            System.out.println("Email untuk account : " + account.getEmail());
@@ -78,16 +79,16 @@ public class AccountController {
 //            System.out.println("Ini adalah encodePassword : " + account.getPassword());
 
             String encodePassword = hashPassword(account.getPassword());
-            int checkPassword = checkPass(account.getPassword(), encodePassword);
+            int checkPassword = checkPass(user.get().getPassword(), encodePassword);
 
             if(checkPassword == 1){
                 return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
             }
             else{
-                return new ResponseEntity<ProjectStatus>(new ProjectStatus("Failed..."), HttpStatus.OK);
+                return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong password..."), HttpStatus.OK);
             }
         }
-        else return new ResponseEntity<ProjectStatus>(new ProjectStatus("Failed..."), HttpStatus.OK);
+        else return new ResponseEntity<ProjectStatus>(new ProjectStatus("Email not found..."), HttpStatus.OK);
     }
 
     @GetMapping("/listacc")
