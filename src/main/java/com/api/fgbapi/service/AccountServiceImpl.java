@@ -21,7 +21,7 @@ public class AccountServiceImpl implements UserDetailsService, AccountService {
 
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         Account user = accountRepository.findByEmail(userId);
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority());

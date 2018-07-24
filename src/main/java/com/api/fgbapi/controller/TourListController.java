@@ -13,14 +13,14 @@ import java.util.List;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
-@RequestMapping(path="/tourlist", method = GET)
+@RequestMapping(path = "/tourlist", method = GET)
 public class TourListController {
     @Autowired
     TourListRepository tourListRepository;
 
     @GetMapping("/show")
     public @ResponseBody
-    List<TourList> TesterHello(){
+    List<TourList> TesterHello() {
         return tourListRepository.findAll();
 
     }

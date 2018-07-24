@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value="/balance", method = RequestMethod.GET)
+@RequestMapping(value = "/balance", method = RequestMethod.GET)
 public class BalanceController {
 
     @Autowired
@@ -25,14 +25,14 @@ public class BalanceController {
 
     @GetMapping("/helo")
     public @ResponseBody
-    String TesterHello(){
+    String TesterHello() {
         return "HELLO WORLD";
 
     }
 
     @PutMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    ResponseEntity<ProjectStatus> saveBalance(@Valid @RequestBody Balance user){
+    ResponseEntity<ProjectStatus> saveBalance(@Valid @RequestBody Balance user) {
         String uniqueID = UUID.randomUUID().toString();
         user.setId(uniqueID);
         balanceService.save(user);
@@ -40,12 +40,12 @@ public class BalanceController {
     }
 
     @GetMapping(value = "/all")
-    public List<Balance> getAll(){
+    public List<Balance> getAll() {
         return balanceService.findAll();
     }
 
-    @GetMapping(value="/details/{id}")
-    public Optional<Balance> getBalanceById(@PathVariable(value = "id") String id ){
+    @GetMapping(value = "/details/{id}")
+    public Optional<Balance> getBalanceById(@PathVariable(value = "id") String id) {
         return balanceService.findById(id);
     }
 }

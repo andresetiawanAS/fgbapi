@@ -17,9 +17,9 @@ import java.util.Optional;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
-@RequestMapping(path="/users", method = GET)
+@RequestMapping(path = "/users", method = GET)
 public class AccountController {
-    private String hashPassword(String plainTextPassword){
+    private String hashPassword(String plainTextPassword) {
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
 
@@ -35,21 +35,21 @@ public class AccountController {
 
     @PostMapping("/tester")
     public @ResponseBody
-    ResponseEntity<ProjectStatus> Tester(){
+    ResponseEntity<ProjectStatus> Tester() {
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
 
     }
 
     @GetMapping("/helo")
     public @ResponseBody
-    String TesterHello(){
+    String TesterHello() {
         return "HELLO WORLD";
 
     }
 
     @PostMapping("/registerdemo")
     public @ResponseBody
-    String registNewAccountDemo(@Valid @RequestBody Account account){
+    String registNewAccountDemo(@Valid @RequestBody Account account) {
         accountService.save(account);
         return "saved";
     }
@@ -57,7 +57,7 @@ public class AccountController {
     @CrossOrigin(origins = "*")
     @PostMapping("/registerlive")
     public @ResponseBody
-    ResponseEntity<ProjectStatus> registNewAccountLive(@Valid @RequestBody Account account){
+    ResponseEntity<ProjectStatus> registNewAccountLive(@Valid @RequestBody Account account) {
         account.setPassword(hashPassword(account.getPassword()));
         account.setId("1");
         account.setLive(true);
@@ -68,33 +68,31 @@ public class AccountController {
 
     @PostMapping("/loginlive")
     @CrossOrigin(origins = "*")
-    public @ResponseBody ResponseEntity<ProjectStatus> loginAccountLive(@Valid @RequestBody Account account){
+    public @ResponseBody
+    ResponseEntity<ProjectStatus> loginAccountLive(@Valid @RequestBody Account account) {
         Optional<Account> user = accountService.findByEmail(account.getEmail());
 //        user.orElseThrow(()-> new UsernameNotFoundException("Email not found!"));
 
-        if (user.get().getEmail().equals(account.getEmail())){
-//            System.out.println("Email untuk account : " + account.getEmail());
-//            System.out.println("Email untuk user : " + user.get().getEmail());
-//            System.out.println("Ini adalah object account password : " + account.getPassword());
-//            System.out.println("Ini adalah encodePassword : " + account.getPassword());
+        if (user.get().getEmail().equals(account.getEmail())) {
 
-            String encodePassword = hashPassword(account.getPassword());
-            int checkPassword = checkPass(user.get().getPassword(), encodePassword);
+            int checkPassword = checkPass(account.getPassword(), user.get().getPassword());
 
-            if(checkPassword == 1){
+            if (checkPassword == 1) {
                 return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
-            }
-            else{
+            } else {
                 return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong password..."), HttpStatus.OK);
             }
+        } else {
+            System.out.println("What is this?");
+            ;
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Email not found..."), HttpStatus.OK);
         }
-        else return new ResponseEntity<ProjectStatus>(new ProjectStatus("Email not found..."), HttpStatus.OK);
     }
 
     @GetMapping("/listacc")
     @CrossOrigin(origins = "*")
     public @ResponseBody
-    List<Account> showListAccDemo(){
+    List<Account> showListAccDemo() {
         return accountService.findAll();
     }
 
@@ -106,7 +104,8 @@ public class AccountController {
 
     @GetMapping("/update/{id}")
     @CrossOrigin(origins = "*")
-    public  @ResponseBody ResponseEntity<ProjectStatus> updateAccById(@PathVariable(value = "id") String id) {
+    public @ResponseBody
+    ResponseEntity<ProjectStatus> updateAccById(@PathVariable(value = "id") String id) {
         Account accToUpdate = accountService.updateById(id);
         accToUpdate.setFirst_name(id);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
