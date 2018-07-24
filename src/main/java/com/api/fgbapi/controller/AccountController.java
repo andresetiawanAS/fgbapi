@@ -72,7 +72,6 @@ public class AccountController {
 
 
         if (user.get().getEmail().equals(account.getEmail())){
-            System.out.println(user.get().getAcc_owner());
 //            System.out.println("Email untuk account : " + account.getEmail());
 //            System.out.println("Email untuk user : " + user.get().getEmail());
 //            System.out.println("Ini adalah object account password : " + account.getPassword());
