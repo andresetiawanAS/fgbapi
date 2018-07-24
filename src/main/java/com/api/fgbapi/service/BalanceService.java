@@ -9,6 +9,6 @@ public interface BalanceService {
     Balance save(Balance user);
     List<Balance> findAll();
     void delete(long id);
-    Optional<Balance> findById(String user);
-    Balance updateById(String user);
+    Optional<Balance> findById(String id);
+    Balance updateById(String id);
 }

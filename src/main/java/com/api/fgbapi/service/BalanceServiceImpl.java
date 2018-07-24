@@ -21,7 +21,7 @@ public class BalanceServiceImpl implements BalanceService {
 
     @Override
     public List<Balance> findAll() {
-        return null;
+        return balanceRepository.findAll();
     }
 
     @Override
@@ -30,8 +30,8 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Optional<Balance> findById(String user) {
-        return Optional.empty();
+    public Optional<Balance> findById(String id) {
+        return balanceRepository.findById(id);
     }
 
     @Override

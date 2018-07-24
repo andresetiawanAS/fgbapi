@@ -16,16 +16,16 @@ import java.util.Date;
 @JsonIgnoreProperties(value = {"last_topup"}, allowGetters = true)
 public class Balance implements Serializable {
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     String id;
     String id_card;
     Double balance;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     Date last_topup = new Date();
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="account_id", nullable = false)
-    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name="account_id", nullable = false)
+//    @JsonIgnore
     private String acc_id;
 
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value="/balance", method = RequestMethod.GET)
@@ -30,8 +32,18 @@ public class BalanceController {
     @PutMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     ResponseEntity<ProjectStatus> saveBalance(@Valid @RequestBody Balance user){
-//        user.setAcc_id("1");
+
         balanceService.save(user);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all")
+    public List<Balance> getAll(){
+        return balanceService.findAll();
+    }
+
+    @GetMapping(value="/details/{id}")
+    public Optional<Balance> getBalanceById(@PathVariable(value = "id") String id ){
+        return balanceService.findById(id);
     }
 }
