@@ -15,8 +15,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"last_topup"}, allowGetters = true)
 public class Balance implements Serializable {
-    @Id
-
+    @Id 
     String id;
     String id_card;
     Double balance;
