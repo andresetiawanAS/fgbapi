@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface TopUpHistoryService {
     TopUpHistory save(TopUpHistory user);
     List<TopUpHistory> findAll();
-    void delete(String id);
+    void delete(TopUpHistory topUpHistory);
     Optional<TopUpHistory> findById(String user);
     TopUpHistory updateById(String user);
 }

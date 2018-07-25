@@ -40,8 +40,9 @@ public class TopUpHistoryController {
         return topUpHistoryService.findById(id);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void delete(String id){
-        topUpHistoryService.delete(id);
+    @PostMapping(value = "/delete")
+    public void delete(TopUpHistory history){
+        history.setStatus("Delete");
+        topUpHistoryService.save(history);
     }
 }

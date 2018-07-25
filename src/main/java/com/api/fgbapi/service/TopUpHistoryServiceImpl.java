@@ -30,8 +30,8 @@ public class TopUpHistoryServiceImpl implements TopUpHistoryService{
     }
 
     @Override
-    public void delete(String id){
-        topUpHistoryRepository.delete(id);
+    public void delete(TopUpHistory topUpHistory){
+        topUpHistoryRepository.save(topUpHistory);
     }
 
     @Override

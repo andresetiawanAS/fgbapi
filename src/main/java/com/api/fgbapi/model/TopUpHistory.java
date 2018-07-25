@@ -20,6 +20,7 @@ public class TopUpHistory {
     @Id
     String id;
     Double topup_value;
+    String status;
     @CreatedDate
     Date topup_date;
     Long balance_id;
@@ -54,5 +55,13 @@ public class TopUpHistory {
 
     public void setBalance_id(Long balance_id) {
         this.balance_id = balance_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
