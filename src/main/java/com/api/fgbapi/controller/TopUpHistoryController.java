@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 
 import javax.validation.Valid;
 import java.awt.*;
@@ -25,7 +26,7 @@ public class TopUpHistoryController {
         return topUpHistoryService.findAll();
     }
 
-    @GetMapping(value = "/save", consumes = org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     ResponseEntity<ProjectStatus> saveTopUpHistory(@Valid @RequestBody TopUpHistory history){
         String uniqueID = UUID.randomUUID().toString();
@@ -39,7 +40,7 @@ public class TopUpHistoryController {
         return topUpHistoryService.findById(id);
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     public void delete(String id){
         topUpHistoryService.delete(id);
     }
