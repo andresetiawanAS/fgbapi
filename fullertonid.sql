@@ -1,27 +1,47 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.8.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1    Database: fullertonid
--- ------------------------------------------------------
--- Server version	5.6.26
+-- Host: 127.0.0.1
+-- Generation Time: Jul 25, 2018 at 04:38 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `fullertonid`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `balance`
+--
+
+CREATE TABLE `balance` (
+  `id` varchar(36) NOT NULL,
+  `id_card` varchar(45) DEFAULT NULL,
+  `last_topup` date DEFAULT NULL,
+  `balance` double DEFAULT NULL,
+  `acc_id` varchar(36) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `master_account`
 --
 
-DROP TABLE IF EXISTS `master_account`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `master_account` (
   `id` varchar(36) NOT NULL,
   `ref_id` varchar(45) DEFAULT NULL,
@@ -65,55 +85,70 @@ CREATE TABLE `master_account` (
   `date_updated` datetime DEFAULT NULL,
   `id_card` varchar(45) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
-  `refresh_token` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `refresh_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `balance`
+-- Dumping data for table `master_account`
 --
 
-DROP TABLE IF EXISTS `balance`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `balance` (
-  `id` varchar(36) NOT NULL,
-  `id_card` varchar(45) DEFAULT NULL,
-  `last_topup` date DEFAULT NULL,
-  `balance` double DEFAULT NULL,
-  `acc_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_acc_id_idx` (`acc_id`),
-  CONSTRAINT `FK_acc_id` FOREIGN KEY (`acc_id`) REFERENCES `master_account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `master_account` (`id`, `ref_id`, `acc_type`, `acc_owner`, `first_name`, `last_name`, `pref_name`, `dob`, `country`, `address`, `city`, `province`, `zip_code`, `phone`, `email`, `password`, `security_question`, `security_answer`, `confirm_security_answer`, `education`, `trading_experience`, `trading_frequency`, `purpose_of_trading`, `annual_gross_income`, `net_worth`, `income_source`, `is_muslim`, `public_position`, `detail_public_position`, `family_public_position`, `detail_family_public_position`, `leverage`, `pref_language`, `proof_of_identity`, `proof_of_residence`, `open_ib_account`, `demo`, `live`, `date_created`, `date_updated`, `id_card`, `gender`, `refresh_token`) VALUES
+('1', NULL, 'Fullerton Markets | Variable Spread | USD', 'Personal', 'Martin', 'Lim', 'Martin', '1997-10-03 00:00:00', 'Indonesia', 'Jl. Jalan', 'Tangerang', 'Jawa Barat', '14405', '085894090909', 'martin.lim@gmail.com', '$2a$10$6kj6.1MfK9wwdRAjFXSTyuViiCcMHm4UbzenAC2lmBDWCuOlfSxZm', 'What is your mtoher\'s maiden name?', 'marta', 'marta', 'Bachelors Degree', 'None', 'Less than 5 trades', 'Speculation', 'Less than $25,000', 'Less than $100,000', 'Self Employed', 'Not Applicable', 'No', NULL, 'No', NULL, '1:10', 'English', NULL, NULL, 'No', NULL, 1, '2018-07-24 00:00:00', '2018-07-24 00:00:00', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `topup_history`
 --
 
-DROP TABLE IF EXISTS `topup_history`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `topup_history` (
   `id` varchar(36) NOT NULL,
   `topup_value` double DEFAULT NULL,
   `topup_date` datetime DEFAULT NULL,
-  `balance_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_balance_id_idx` (`balance_id`),
-  CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `balance_id` varchar(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `balance`
+--
+ALTER TABLE `balance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_acc_id_idx` (`acc_id`);
+
+--
+-- Indexes for table `master_account`
+--
+ALTER TABLE `master_account`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `topup_history`
+--
+ALTER TABLE `topup_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_balance_id_idx` (`balance_id`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `balance`
+--
+ALTER TABLE `balance`
+  ADD CONSTRAINT `FK_acc_id` FOREIGN KEY (`acc_id`) REFERENCES `master_account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `topup_history`
+--
+ALTER TABLE `topup_history`
+  ADD CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-07-23 11:51:47
