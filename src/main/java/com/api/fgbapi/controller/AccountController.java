@@ -84,7 +84,7 @@ public class AccountController {
             }
         } else {
             System.out.println("What is this?");
-            ;
+            
             return new ResponseEntity<ProjectStatus>(new ProjectStatus("Email not found..."), HttpStatus.OK);
         }
     }
