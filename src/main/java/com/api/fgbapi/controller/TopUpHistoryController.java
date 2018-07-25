@@ -26,7 +26,7 @@ public class TopUpHistoryController {
         return topUpHistoryService.findAll();
     }
 
-    @GetMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PutMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     ResponseEntity<ProjectStatus> saveTopUpHistory(@Valid @RequestBody TopUpHistory history){
         String uniqueID = UUID.randomUUID().toString();
