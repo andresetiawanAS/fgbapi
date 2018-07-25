@@ -38,4 +38,9 @@ public class TopUpHistoryController {
     public Optional<TopUpHistory> getById(@PathVariable(value = "id") String id){
         return topUpHistoryService.findById(id);
     }
+
+    @DeleteMapping(value = "{id}")
+    public void delete(String id){
+        topUpHistoryService.delete(id);
+    }
 }
