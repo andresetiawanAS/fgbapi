@@ -105,7 +105,7 @@ CREATE TABLE `topup_history` (
   `id` varchar(36) NOT NULL,
   `topup_value` double DEFAULT NULL,
   `topup_date` datetime DEFAULT NULL,
-  `balance_id` varchar(36) DEFAULT NULL
+  `balance_id` varchar(36) DEFAULT NULL,`status` varchar(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
