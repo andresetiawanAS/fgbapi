@@ -23,8 +23,8 @@ public class Balance implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     Date last_topup = new Date();
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name="account_id", nullable = false)
-//    @JsonIgnore
+////    @JoinColumn(name="account_id", nullable = false)
+////    @JsonIgnore
     private String acc_id;
 
 
