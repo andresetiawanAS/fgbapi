@@ -28,7 +28,6 @@ public class TransactionHistoryController {
     BalanceService balanceService;
 
     public List<TransactionHistory> getAll(){
-
         return transactionHistoryService.findAll();
     }
 
@@ -41,14 +40,14 @@ public class TransactionHistoryController {
         Optional<Balance> balance = balanceService.findById(id);
 
         if (balance.get().getId().equals(history.getBalance_id()) && balance.get().getBalance() > history.getTransaction_value()) {
-            transactionHistoryService.save(history);
-            balanceService.updateById(history.getBalance_id(),history.getTransaction_value());
+            //cek FK di TransactionHistory = di PK Balance && Jumlah saldo > pengeluaran THEN transaksi dilakukan
+            transactionHistoryService.save(history); //simpan transaksi di TransactionHistory
+            balanceService.updateById(history.getBalance_id(),history.getTransaction_value()); //jumlah saldo setelah transaksi
             return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success... Saldo sisa " + balance.get().getBalance()), HttpStatus.OK);
         }
         else{
             return new ResponseEntity<ProjectStatus>(new ProjectStatus("Credit insufficient..."), HttpStatus.OK);
         }
-
     }
 
     @GetMapping(value = "/details/{id}")
