@@ -22,7 +22,7 @@ public class TopUpHistory {
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     Date topup_date;
-    Long balance_id;
+    String balance_id;
 
     public String getId() {
         return id;
@@ -48,11 +48,11 @@ public class TopUpHistory {
         this.topup_date = topup_date;
     }
 
-    public Long getBalance_id() {
+    public String getBalance_id() {
         return balance_id;
     }
 
-    public void setBalance_id(Long balance_id) {
+    public void setBalance_id(String balance_id) {
         this.balance_id = balance_id;
     }
 
