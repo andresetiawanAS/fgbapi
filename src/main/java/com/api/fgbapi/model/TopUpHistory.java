@@ -21,7 +21,7 @@ public class TopUpHistory {
     @CreatedDate
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    Date topup_date;
+    Date topup_date = new Date();
     String balance_id;
 
     public String getId() {
