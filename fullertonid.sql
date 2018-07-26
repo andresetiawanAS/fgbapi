@@ -108,6 +108,13 @@ CREATE TABLE `topup_history` (
   `balance_id` varchar(36) DEFAULT NULL,`status` varchar(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `transaction_history` (
+  `id` varchar(36) NOT NULL,
+  `transaction_value` double DEFAULT NULL,
+  `transaction_date` datetime DEFAULT NULL,
+  `balance_id` varchar(36) DEFAULT NULL,`status` varchar(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -145,6 +152,9 @@ ALTER TABLE `balance`
 --
 -- Constraints for table `topup_history`
 --
+ALTER TABLE `topup_history`
+  ADD CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 ALTER TABLE `topup_history`
   ADD CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
