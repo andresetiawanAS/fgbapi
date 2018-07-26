@@ -18,6 +18,7 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService{
 
     @Override
     public List<TransactionHistory> findAll(){
+
         return transactionHistoryRepository.findAll();
     }
 

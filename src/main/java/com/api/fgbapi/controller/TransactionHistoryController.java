@@ -28,6 +28,7 @@ public class TransactionHistoryController {
     BalanceService balanceService;
 
     public List<TransactionHistory> getAll(){
+
         return transactionHistoryService.findAll();
     }
 
@@ -57,7 +58,7 @@ public class TransactionHistoryController {
 
     @PostMapping(value = "/delete/{id}")
     public ResponseEntity<ProjectStatus> delete(@PathVariable(value = "id") TransactionHistory history){
-        history.setStatus("Delete");
+        history.setStatus("Inactive");
         transactionHistoryService.save(history);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Delete success..."), HttpStatus.OK);
     }
