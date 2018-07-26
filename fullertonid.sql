@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2018 at 04:38 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Waktu pembuatan: 26 Jul 2018 pada 05.50
+-- Versi server: 10.1.31-MariaDB
+-- Versi PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `balance`
+-- Struktur dari tabel `balance`
 --
 
 CREATE TABLE `balance` (
@@ -36,10 +36,18 @@ CREATE TABLE `balance` (
   `acc_id` varchar(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `balance`
+--
+
+INSERT INTO `balance` (`id`, `id_card`, `last_topup`, `balance`, `acc_id`) VALUES
+('057ff083-6658-4b61-a5b8-98c617530cb5', '4321432143214321', '2018-07-24', 135000, '1'),
+('0a4ec202-2180-413c-83ba-fc762c4ca86e', '4321432143214321', '2018-07-24', 125000, '1');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_account`
+-- Struktur dari tabel `master_account`
 --
 
 CREATE TABLE `master_account` (
@@ -89,23 +97,45 @@ CREATE TABLE `master_account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `master_account`
+-- Dumping data untuk tabel `master_account`
 --
 
 INSERT INTO `master_account` (`id`, `ref_id`, `acc_type`, `acc_owner`, `first_name`, `last_name`, `pref_name`, `dob`, `country`, `address`, `city`, `province`, `zip_code`, `phone`, `email`, `password`, `security_question`, `security_answer`, `confirm_security_answer`, `education`, `trading_experience`, `trading_frequency`, `purpose_of_trading`, `annual_gross_income`, `net_worth`, `income_source`, `is_muslim`, `public_position`, `detail_public_position`, `family_public_position`, `detail_family_public_position`, `leverage`, `pref_language`, `proof_of_identity`, `proof_of_residence`, `open_ib_account`, `demo`, `live`, `date_created`, `date_updated`, `id_card`, `gender`, `refresh_token`) VALUES
-('1', NULL, 'Fullerton Markets | Variable Spread | USD', 'Personal', 'Martin', 'Lim', 'Martin', '1997-10-03 00:00:00', 'Indonesia', 'Jl. Jalan', 'Tangerang', 'Jawa Barat', '14405', '085894090909', 'martin.lim@gmail.com', '$2a$10$6kj6.1MfK9wwdRAjFXSTyuViiCcMHm4UbzenAC2lmBDWCuOlfSxZm', 'What is your mtoher\'s maiden name?', 'marta', 'marta', 'Bachelors Degree', 'None', 'Less than 5 trades', 'Speculation', 'Less than $25,000', 'Less than $100,000', 'Self Employed', 'Not Applicable', 'No', NULL, 'No', NULL, '1:10', 'English', NULL, NULL, 'No', NULL, 1, '2018-07-24 00:00:00', '2018-07-24 00:00:00', NULL, NULL, NULL);
+('1', NULL, 'Fullerton Markets | Variable Spread | USD', 'Personal', 'Martin', 'Lim', 'Martin', '1997-10-03 00:00:00', 'Indonesia', 'Jl. Jalan', 'Tangerang', 'Jawa Barat', '14405', '085894090909', 'martin.lim@gmail.com', '$2y$12$bNLiKR4QrHyufgfwOfHWOu.ld.8/gwCG6L6N1Wei.OQzp95I4Fxd.', 'What is your mtoher\'s maiden name?', 'marta', 'marta', 'Bachelors Degree', 'None', 'Less than 5 trades', 'Speculation', 'Less than $25,000', 'Less than $100,000', 'Self Employed', 'Not Applicable', 'No', NULL, 'No', NULL, '1:10', 'English', NULL, NULL, 'No', NULL, 1, '2018-07-24 00:00:00', '2018-07-24 00:00:00', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `topup_history`
+-- Struktur dari tabel `topup_history`
 --
 
 CREATE TABLE `topup_history` (
   `id` varchar(36) NOT NULL,
   `topup_value` double DEFAULT NULL,
   `topup_date` datetime DEFAULT NULL,
-  `balance_id` varchar(36) DEFAULT NULL,`status` varchar(6) DEFAULT NULL
+  `balance_id` varchar(36) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `topup_history`
+--
+
+INSERT INTO `topup_history` (`id`, `topup_value`, `topup_date`, `balance_id`, `status`) VALUES
+('28479da6-ff01-43c7-8cb3-773e7f9f4ad3', 10000, '2018-07-26 09:45:36', '057ff083-6658-4b61-a5b8-98c617530cb5', 'Delete');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaction_history`
+--
+
+CREATE TABLE `transaction_history` (
+  `id` varchar(36) NOT NULL,
+  `transaction_value` double DEFAULT NULL,
+  `transaction_date` datetime DEFAULT NULL,
+  `balance_id` varchar(36) DEFAULT NULL,
+  `status` varchar(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `transaction_history` (
@@ -120,43 +150,58 @@ CREATE TABLE `transaction_history` (
 --
 
 --
--- Indexes for table `balance`
+-- Indeks untuk tabel `balance`
 --
 ALTER TABLE `balance`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_acc_id_idx` (`acc_id`);
 
 --
--- Indexes for table `master_account`
+-- Indeks untuk tabel `master_account`
 --
 ALTER TABLE `master_account`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `topup_history`
+-- Indeks untuk tabel `topup_history`
 --
 ALTER TABLE `topup_history`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_balance_id_idx` (`balance_id`);
 
 --
--- Constraints for dumped tables
+-- Indeks untuk tabel `transaction_history`
+--
+ALTER TABLE `transaction_history`
+  ADD KEY `FK_balance_id1` (`balance_id`);
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `balance`
+-- Ketidakleluasaan untuk tabel `balance`
 --
 ALTER TABLE `balance`
-  ADD CONSTRAINT `FK_acc_id` FOREIGN KEY (`acc_id`) REFERENCES `master_account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_acc_id` FOREIGN KEY (`acc_id`) REFERENCES `master_account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FKh04xhh51xbx0fjrpm7vv0p93d` FOREIGN KEY (`acc_id`) REFERENCES `master_account` (`id`);
 
 --
--- Constraints for table `topup_history`
+-- Ketidakleluasaan untuk tabel `topup_history`
 --
 ALTER TABLE `topup_history`
   ADD CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+<<<<<<< HEAD
+--
+-- Ketidakleluasaan untuk tabel `transaction_history`
+--
+ALTER TABLE `transaction_history`
+  ADD CONSTRAINT `FK_balance_id1` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+=======
 ALTER TABLE `topup_history`
   ADD CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+>>>>>>> 434a550e0472dd88c1cabae0a506363011af6374
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

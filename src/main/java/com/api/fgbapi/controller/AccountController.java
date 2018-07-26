@@ -95,7 +95,6 @@ public class AccountController {
 
     }
 
-
     @GetMapping("/listacc")
     @CrossOrigin(origins = "*")
     public @ResponseBody
