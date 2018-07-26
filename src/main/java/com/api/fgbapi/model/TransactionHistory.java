@@ -32,20 +32,20 @@ public class TransactionHistory {
         this.id = id;
     }
 
-    public Double getTopup_value() {
+    public Double getTransaction_value() {
         return transaction_value;
     }
 
-    public void setTopup_value(Double topup_value) {
-        this.transaction_value = topup_value;
+    public void setTransaction_value(Double transaction_value) {
+        this.transaction_value = transaction_value;
     }
 
-    public Date getTopup_date() {
+    public Date getTransaction_date() {
         return transaction_date;
     }
 
-    public void setTopup_date(Date topup_date) {
-        this.transaction_date = topup_date;
+    public void setTransaction_date(Date transaction_date) {
+        this.transaction_date = transaction_date;
     }
 
     public String getBalance_id() {
