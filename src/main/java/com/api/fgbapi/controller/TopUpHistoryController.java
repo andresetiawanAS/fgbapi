@@ -41,8 +41,8 @@ public class TopUpHistoryController implements Serializable {
         return topUpHistoryService.findById(id);
     }
 
-    @PostMapping(value = "/delete")
-    public void delete(TopUpHistory history){
+    @PostMapping(value = "/delete/{id}")
+    public void delete(@PathVariable(value = "id") TopUpHistory history){
         history.setStatus("Delete");
         topUpHistoryService.save(history);
     }
