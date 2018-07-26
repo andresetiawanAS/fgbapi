@@ -49,7 +49,6 @@ INSERT INTO `balance` (`id`, `id_card`, `last_topup`, `balance`, `acc_id`) VALUE
 --
 -- Struktur dari tabel `master_account`
 --
-
 CREATE TABLE `master_account` (
   `id` varchar(36) NOT NULL,
   `ref_id` varchar(45) DEFAULT NULL,
@@ -138,13 +137,6 @@ CREATE TABLE `transaction_history` (
   `status` varchar(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `transaction_history` (
-  `id` varchar(36) NOT NULL,
-  `transaction_value` double DEFAULT NULL,
-  `transaction_date` datetime DEFAULT NULL,
-  `balance_id` varchar(36) DEFAULT NULL,`status` varchar(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Indexes for dumped tables
 --
@@ -192,16 +184,11 @@ ALTER TABLE `balance`
 ALTER TABLE `topup_history`
   ADD CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-<<<<<<< HEAD
 --
 -- Ketidakleluasaan untuk tabel `transaction_history`
 --
 ALTER TABLE `transaction_history`
   ADD CONSTRAINT `FK_balance_id1` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-=======
-ALTER TABLE `topup_history`
-  ADD CONSTRAINT `FK_balance_id` FOREIGN KEY (`balance_id`) REFERENCES `balance` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
->>>>>>> 434a550e0472dd88c1cabae0a506363011af6374
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
