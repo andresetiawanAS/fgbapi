@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -22,6 +19,8 @@ public class TopUpHistory {
     Double topup_value;
     String status;
     @CreatedDate
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     Date topup_date;
     Long balance_id;
 
