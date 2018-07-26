@@ -35,7 +35,9 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Balance updateById(String user) {
-        return null;
+    public Balance updateById(String user,Double trans) {
+        Balance update= balanceRepository.getOne(user);
+        update.setBalance(update.getBalance()-trans);
+        return balanceRepository.save(update);
     }
 }

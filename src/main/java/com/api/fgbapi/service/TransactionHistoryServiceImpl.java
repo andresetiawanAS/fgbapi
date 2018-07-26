@@ -5,10 +5,12 @@ import com.api.fgbapi.model.TransactionHistory;
 import com.api.fgbapi.repository.TopUpHistoryRepository;
 import com.api.fgbapi.repository.TransactionHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service (value= "transactionService")
 public class TransactionHistoryServiceImpl implements TransactionHistoryService{
 
     @Autowired
