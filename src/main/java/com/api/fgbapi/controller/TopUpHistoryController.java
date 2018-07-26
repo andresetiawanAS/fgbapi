@@ -11,13 +11,14 @@ import org.springframework.http.MediaType;
 
 import javax.validation.Valid;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/history", method=RequestMethod.GET)
-public class TopUpHistoryController {
+public class TopUpHistoryController implements Serializable {
 
     @Autowired
     TopUpHistoryService topUpHistoryService;
