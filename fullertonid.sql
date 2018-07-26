@@ -113,7 +113,7 @@ CREATE TABLE `topup_history` (
   `topup_value` double DEFAULT NULL,
   `topup_date` datetime DEFAULT NULL,
   `balance_id` varchar(36) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL
+  `status` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `transaction_history` (
   `transaction_value` double DEFAULT NULL,
   `transaction_date` datetime DEFAULT NULL,
   `balance_id` varchar(36) DEFAULT NULL,
-  `status` varchar(6) DEFAULT NULL
+  `status` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
