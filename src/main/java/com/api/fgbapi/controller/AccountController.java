@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -72,22 +73,28 @@ public class AccountController {
     ResponseEntity<ProjectStatus> loginAccountLive(@Valid @RequestBody Account account) {
         Optional<Account> user = accountService.findByEmail(account.getEmail());
 //        user.orElseThrow(()-> new UsernameNotFoundException("Email not found!"));
+        System.out.println(user);
 
-        if (user.get().getEmail().equals(account.getEmail())) {
+        try {
+            if (user.get().getEmail().equals(account.getEmail())) {
 
-            int checkPassword = checkPass(account.getPassword(), user.get().getPassword());
+                int checkPassword = checkPass(account.getPassword(), user.get().getPassword());
 
-            if (checkPassword == 1) {
-                return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong password..."), HttpStatus.OK);
+                if (checkPassword == 1) {
+                    return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong password..."), HttpStatus.OK);
+                }
             }
-        } else {
+        } catch (NoSuchElementException exception) {
             System.out.println("What is this?");
-            
+
             return new ResponseEntity<ProjectStatus>(new ProjectStatus("Email not found..."), HttpStatus.OK);
         }
+        return null;
+
     }
+
 
     @GetMapping("/listacc")
     @CrossOrigin(origins = "*")
