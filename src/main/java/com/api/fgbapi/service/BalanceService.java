@@ -12,6 +12,6 @@ public interface BalanceService {
     Optional<Balance> findById(String id);
     Balance updateById(String id, Double trans);
     Balance updateBalanceById(String id, Double topUpValue);
-    Balance updateCardById(String id, String cardId);
+    Balance updateCardById(Balance user);
 
 }

@@ -52,13 +52,10 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Balance updateCardById(String id, String cardId){
-        Balance bal = balanceRepository.getOne(id);
-
-        bal.setId_card(cardId);
-        System.out.println("WOI PARAH"+bal.getId_card());
+    public Balance updateCardById(Balance user){
+        Balance bal = balanceRepository.getOne(user.getId());
+        bal.setId_card(user.getId_card());
         return balanceRepository.save(bal);
-
     }
 
 }

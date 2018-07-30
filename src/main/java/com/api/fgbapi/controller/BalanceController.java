@@ -51,12 +51,10 @@ public class BalanceController {
         return balanceService.findById(id);
     }
 
-    @PostMapping(value = "/update_card/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    ResponseEntity<ProjectStatus> updateCardById(@PathVariable(value = "id") @Valid @RequestBody Balance user ){
-        Optional<Balance> bal = balanceService.findById(user.getId());
-        String id = bal.get().getId();
-        String cardId = bal.get().getId_card();
-        balanceService.updateCardById(id, cardId);
+    @PostMapping(value = "/update_card/{id}")
+    ResponseEntity<ProjectStatus> updateCardById(@PathVariable(value = "id") String id, @Valid @RequestBody Balance user ){
+        user.setId(id);
+        balanceService.updateCardById(user);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK); //nandain insertnya success/ga
     }
 }
