@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -60,7 +61,8 @@ public class AccountController {
     public @ResponseBody
     ResponseEntity<ProjectStatus> registNewAccountLive(@Valid @RequestBody Account account) {
         account.setPassword(hashPassword(account.getPassword()));
-        account.setId("1");
+        String id = UUID.randomUUID().toString();
+        account.setId(id);
         account.setLive(true);
         System.out.println(account.getAcc_owner());
         accountService.save(account);
