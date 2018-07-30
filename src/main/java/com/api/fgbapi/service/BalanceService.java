@@ -11,4 +11,6 @@ public interface BalanceService {
     void delete(long id);
     Optional<Balance> findById(String id);
     Balance updateById(String id, Double trans);
+    Balance updateBalanceById(String id, Double topUpValue);
+
 }

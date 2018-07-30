@@ -2,7 +2,9 @@ package com.api.fgbapi.controller;
 
 import com.api.fgbapi.misc.ProjectStatus;
 import com.api.fgbapi.model.Balance;
+import com.api.fgbapi.model.TopUpHistory;
 import com.api.fgbapi.service.BalanceService;
+import com.api.fgbapi.service.TopUpHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,11 +32,12 @@ public class BalanceController {
 
     }
 
-    @PutMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    ResponseEntity<ProjectStatus> saveBalance(@Valid @RequestBody Balance user) {
-        String uniqueID = UUID.randomUUID().toString(); //generate random id
-        user.setId(uniqueID); //set random id ke setiap record balance yang dibuat
+    ResponseEntity<ProjectStatus> updateBalance(@Valid @RequestBody Balance user) {
+//        String uniqueID = UUID.randomUUID().toString(); //generate random id
+//        user.setId(uniqueID); //set random id ke setiap record balance yang dibuat
+        //String id = user.getId();
         balanceService.save(user);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK); //nandain insertnya success/ga
     }

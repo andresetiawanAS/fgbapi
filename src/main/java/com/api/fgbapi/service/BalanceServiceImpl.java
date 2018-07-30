@@ -43,4 +43,11 @@ public class BalanceServiceImpl implements BalanceService {
         update.setBalance(newBalance);
         return balanceRepository.save(update);
     }
+
+    @Override
+    public Balance updateBalanceById(String id, Double topUpValue){
+        Balance update = balanceRepository.getOne(id);
+        update.setBalance(update.getBalance()+topUpValue);
+        return balanceRepository.save(update);
+    }
 }

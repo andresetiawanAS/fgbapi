@@ -1,7 +1,9 @@
 package com.api.fgbapi.controller;
 
 import com.api.fgbapi.misc.ProjectStatus;
+import com.api.fgbapi.model.Balance;
 import com.api.fgbapi.model.TopUpHistory;
+import com.api.fgbapi.service.BalanceService;
 import com.api.fgbapi.service.TopUpHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,9 @@ public class TopUpHistoryController implements Serializable {
     @Autowired
     TopUpHistoryService topUpHistoryService;
 
+    @Autowired
+    BalanceService balanceService;
+
     public List<TopUpHistory> getAll(){
         return topUpHistoryService.findAll();
     }
@@ -32,8 +37,15 @@ public class TopUpHistoryController implements Serializable {
     ResponseEntity<ProjectStatus> saveTopUpHistory(@Valid @RequestBody TopUpHistory history){
         String uniqueID = UUID.randomUUID().toString();
         history.setId(uniqueID);
-        topUpHistoryService.save(history);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        String id = history.getBalance_id();
+        Optional<Balance> balance = balanceService.findById(id);
+        if(id.equals(balance.get().getId())){
+            Double topUpValue = history.getTopup_value();
+            topUpHistoryService.save(history);
+            balanceService.updateBalanceById(id, topUpValue);
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        }
+        return null;
     }
 
     @GetMapping(value = "/details/{id}")
