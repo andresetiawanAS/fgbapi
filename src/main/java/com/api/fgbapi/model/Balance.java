@@ -1,5 +1,6 @@
 package com.api.fgbapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,7 +26,11 @@ public class Balance implements Serializable {
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 ////    @JoinColumn(name="account_id", nullable = false)
 ////    @JsonIgnore
-    private String acc_id;
+    //private String acc_id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "acc_id")
+    @JsonBackReference
+    private Account account;
 
 
     public String getId() {
@@ -60,13 +65,20 @@ public class Balance implements Serializable {
         this.last_topup = last_topup;
     }
 
-    public String getAcc_id() {
-        return acc_id;
+//    public String getAcc_id() {
+//        return acc_id;
+//    }
+//
+//    public void setAcc_id(String acc_id) {
+//        this.acc_id = acc_id;
+//    }
+
+
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAcc_id(String acc_id) {
-        this.acc_id = acc_id;
+    public void setAccount(Account account) {
+        this.account = account;
     }
-
-
 }

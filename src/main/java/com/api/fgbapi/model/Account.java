@@ -6,7 +6,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "master_account")
@@ -62,6 +64,9 @@ public class Account {
     String proof_of_identity;
     String proof_of_residence;
     String open_ib_account;
+
+    @OneToOne(mappedBy = "account")
+    private Balance balance;
 
     public String getId() {
         return id;
@@ -389,5 +394,13 @@ public class Account {
 
     public void setOpen_ib_account(String open_ib_account) {
         this.open_ib_account = open_ib_account;
+    }
+
+    public Balance getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Balance balance) {
+        this.balance = balance;
     }
 }

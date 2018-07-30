@@ -2,7 +2,9 @@ package com.api.fgbapi.controller;
 
 import com.api.fgbapi.misc.ProjectStatus;
 import com.api.fgbapi.model.Account;
+import com.api.fgbapi.model.Balance;
 import com.api.fgbapi.service.AccountService;
+import com.api.fgbapi.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -34,6 +37,8 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private BalanceService balanceService;
 
     @PostMapping("/tester")
     public @ResponseBody
@@ -58,14 +63,22 @@ public class AccountController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/registerlive")
+    @Transactional
     public @ResponseBody
     ResponseEntity<ProjectStatus> registNewAccountLive(@Valid @RequestBody Account account) {
         account.setPassword(hashPassword(account.getPassword()));
         String id = UUID.randomUUID().toString();
         account.setId(id);
         account.setLive(true);
-        System.out.println(account.getAcc_owner());
+
+        Balance balance = new Balance();
+        String balanceId = UUID.randomUUID().toString();
+        balance.setId(balanceId);
+        balance.setBalance(0D);
+        balance.setAccount(account);
+
         accountService.save(account);
+        balanceService.save(balance);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
     }
 
