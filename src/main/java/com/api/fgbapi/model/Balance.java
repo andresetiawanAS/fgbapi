@@ -27,7 +27,7 @@ public class Balance implements Serializable {
     @JoinColumn(name = "acc_id")
     @JsonBackReference
     private Account account;
-    
+
     public String getId() {
         return id;
     }

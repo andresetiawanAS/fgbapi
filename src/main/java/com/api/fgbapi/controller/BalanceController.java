@@ -37,7 +37,6 @@ public class BalanceController {
     ResponseEntity<ProjectStatus> updateBalance(@Valid @RequestBody Balance user) {
         String uniqueID = UUID.randomUUID().toString(); //generate random id
         user.setId(uniqueID); //set random id ke setiap record balance yang dibuat
-        //String id = user.getId();
         balanceService.save(user);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK); //nandain insertnya success/ga
     }
@@ -50,5 +49,14 @@ public class BalanceController {
     @GetMapping(value = "/details/{id}")
     public Optional<Balance> getBalanceById(@PathVariable(value = "id") String id) {
         return balanceService.findById(id);
+    }
+
+    @PostMapping(value = "/update_card/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResponseEntity<ProjectStatus> updateCardById(@PathVariable(value = "id") @Valid @RequestBody Balance user ){
+        Optional<Balance> bal = balanceService.findById(user.getId());
+        String id = bal.get().getId();
+        String cardId = bal.get().getId_card();
+        balanceService.updateCardById(id, cardId);
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK); //nandain insertnya success/ga
     }
 }
