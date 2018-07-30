@@ -23,16 +23,11 @@ public class Balance implements Serializable {
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     Date last_topup = new Date();
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-////    @JoinColumn(name="account_id", nullable = false)
-////    @JsonIgnore
-    //private String acc_id;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "acc_id")
     @JsonBackReference
     private Account account;
-
-
+    
     public String getId() {
         return id;
     }
@@ -64,15 +59,6 @@ public class Balance implements Serializable {
     public void setLast_topup(Date last_topup) {
         this.last_topup = last_topup;
     }
-
-//    public String getAcc_id() {
-//        return acc_id;
-//    }
-//
-//    public void setAcc_id(String acc_id) {
-//        this.acc_id = acc_id;
-//    }
-
 
     public Account getAccount() {
         return account;
