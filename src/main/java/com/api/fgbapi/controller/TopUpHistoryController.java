@@ -29,11 +29,13 @@ public class TopUpHistoryController implements Serializable {
     BalanceService balanceService;
 
     @GetMapping(value = "/all")
+    @CrossOrigin(origins = "*")
     public List<TopUpHistory> getAll(){
         return topUpHistoryService.findAll();
     }
 
     @PutMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     ResponseEntity<ProjectStatus> saveTopUpHistory(@Valid @RequestBody TopUpHistory history){
         String uniqueID = UUID.randomUUID().toString();
@@ -50,11 +52,13 @@ public class TopUpHistoryController implements Serializable {
     }
 
     @GetMapping(value = "/details/{id}")
+    @CrossOrigin(origins = "*")
     public Optional<TopUpHistory> getById(@PathVariable(value = "id") String id){
         return topUpHistoryService.findById(id);
     }
 
     @PostMapping(value = "/delete/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<ProjectStatus> delete(@PathVariable(value = "id") TopUpHistory history){
         history.setStatus("Inactive");
         topUpHistoryService.save(history);

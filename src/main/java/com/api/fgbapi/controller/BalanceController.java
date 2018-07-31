@@ -33,6 +33,7 @@ public class BalanceController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     ResponseEntity<ProjectStatus> updateBalance(@Valid @RequestBody Balance user) {
         String uniqueID = UUID.randomUUID().toString(); //generate random id
@@ -42,16 +43,19 @@ public class BalanceController {
     }
 
     @GetMapping(value = "/all")
+    @CrossOrigin(origins = "*")
     public List<Balance> getAll() {
         return balanceService.findAll();
     }
 
     @GetMapping(value = "/details/{id}")
+    @CrossOrigin(origins = "*")
     public Optional<Balance> getBalanceById(@PathVariable(value = "id") String id) {
         return balanceService.findById(id);
     }
 
     @PostMapping(value = "/update_card/{id}")
+    @CrossOrigin(origins = "*")
     ResponseEntity<ProjectStatus> updateCardById(@PathVariable(value = "id") String id, @Valid @RequestBody Balance user ){
         user.setId(id);
         balanceService.updateCardById(user);

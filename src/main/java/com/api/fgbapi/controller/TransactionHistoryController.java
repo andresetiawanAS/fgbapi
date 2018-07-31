@@ -28,11 +28,13 @@ public class TransactionHistoryController {
     BalanceService balanceService;
 
     @GetMapping("/all")
+    @CrossOrigin(origins = "*")
     public List<TransactionHistory> getAll(){
         return transactionHistoryService.findAll();
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     ResponseEntity<ProjectStatus> saveTopUpHistory(@Valid @RequestBody TransactionHistory history){
         String uniqueID = UUID.randomUUID().toString();
@@ -52,11 +54,13 @@ public class TransactionHistoryController {
     }
 
     @GetMapping(value = "/details/{id}")
+    @CrossOrigin(origins = "*")
     public Optional<TransactionHistory> getById(@PathVariable(value = "id") String id){
         return transactionHistoryService.findById(id);
     }
 
     @PostMapping(value = "/delete/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<ProjectStatus> delete(@PathVariable(value = "id") TransactionHistory history){
         history.setStatus("Inactive");
         transactionHistoryService.save(history);
