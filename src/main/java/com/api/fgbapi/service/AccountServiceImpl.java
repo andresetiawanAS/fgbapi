@@ -53,8 +53,10 @@ public class AccountServiceImpl implements UserDetailsService, AccountService {
     }
 
     @Override
-    public Account updateById(String user) {
-        return accountRepository.getOne(user);
+    public Account updateById(Account user) {
+        Account updateAccount = accountRepository.getOne(user.getId());
+        updateAccount = user;
+        return accountRepository.save(updateAccount);
     }
 
     @Override

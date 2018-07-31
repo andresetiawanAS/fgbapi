@@ -123,12 +123,12 @@ public class AccountController {
         return accountService.findById(id);
     }
 
-    @GetMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     @CrossOrigin(origins = "*")
     public @ResponseBody
-    ResponseEntity<ProjectStatus> updateAccById(@PathVariable(value = "id") String id) {
-        Account accToUpdate = accountService.updateById(id);
-        accToUpdate.setFirst_name(id);
+    ResponseEntity<ProjectStatus> updateAccById(@PathVariable(value = "id") String id, @Valid @RequestBody Account user ) {
+        user.setId(id);
+        accountService.updateById(user);
         return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
     }
 }

@@ -11,5 +11,5 @@ public interface AccountService {
     void delete(long id);
     Optional<Account> findById(String user);
     Optional<Account> findByEmail(String email);
-    Account updateById(String user);
+    Account updateById(Account user);
 }
