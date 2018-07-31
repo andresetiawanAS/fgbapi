@@ -98,13 +98,13 @@ public class AccountController {
                 if (checkPassword == 1) {
                     return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
                 } else {
-                    return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong password..."), HttpStatus.OK);
+                    return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong Email or Password..."), HttpStatus.OK);
                 }
             }
         } catch (NoSuchElementException exception) {
             System.out.println("What is this?");
 
-            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Email not found..."), HttpStatus.OK);
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong Email or Password..."), HttpStatus.OK);
         }
         return null;
 
