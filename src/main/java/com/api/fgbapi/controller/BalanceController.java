@@ -38,7 +38,7 @@ public class BalanceController {
         String uniqueID = UUID.randomUUID().toString(); //generate random id
         user.setId(uniqueID); //set random id ke setiap record balance yang dibuat
         balanceService.save(user);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK); //nandain insertnya success/ga
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK); //nandain insertnya success/ga
     }
 
     @GetMapping(value = "/all")
@@ -55,6 +55,6 @@ public class BalanceController {
     ResponseEntity<ProjectStatus> updateCardById(@PathVariable(value = "id") String id, @Valid @RequestBody Balance user ){
         user.setId(id);
         balanceService.updateCardById(user);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK); //nandain insertnya success/ga
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK); //nandain insertnya success/ga
     }
 }

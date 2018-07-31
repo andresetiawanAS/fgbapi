@@ -44,10 +44,10 @@ public class TransactionHistoryController {
             //cek FK di TransactionHistory = di PK Balance && Jumlah saldo > pengeluaran THEN transaksi dilakukan
             transactionHistoryService.save(history); //simpan transaksi di TransactionHistory
             balanceService.updateById(history.getBalance_id(),history.getTransaction_value()); //jumlah saldo setelah transaksi
-            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success... Saldo sisa " + balance.get().getBalance()), HttpStatus.OK);
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Credit insufficient..."), HttpStatus.OK);
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("False"), HttpStatus.OK); //saldo tidak cukup
         }
     }
 
@@ -60,6 +60,6 @@ public class TransactionHistoryController {
     public ResponseEntity<ProjectStatus> delete(@PathVariable(value = "id") TransactionHistory history){
         history.setStatus("Inactive");
         transactionHistoryService.save(history);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Delete success..."), HttpStatus.OK);
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
     }
 }

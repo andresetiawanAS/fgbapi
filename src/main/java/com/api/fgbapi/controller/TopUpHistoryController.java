@@ -44,7 +44,7 @@ public class TopUpHistoryController implements Serializable {
             Double topUpValue = history.getTopup_value();
             topUpHistoryService.save(history);
             balanceService.updateBalanceById(id, topUpValue);
-            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+            return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
         }
         return null;
     }
@@ -58,6 +58,6 @@ public class TopUpHistoryController implements Serializable {
     public ResponseEntity<ProjectStatus> delete(@PathVariable(value = "id") TopUpHistory history){
         history.setStatus("Inactive");
         topUpHistoryService.save(history);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Delete success..."), HttpStatus.OK);
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
     }
 }

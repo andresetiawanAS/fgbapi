@@ -43,7 +43,7 @@ public class AccountController {
     @PostMapping("/tester")
     public @ResponseBody
     ResponseEntity<ProjectStatus> Tester() {
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
 
     }
 
@@ -79,7 +79,7 @@ public class AccountController {
 
         accountService.save(account);
         balanceService.save(balance);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
     }
 
     @PostMapping("/loginlive")
@@ -96,13 +96,13 @@ public class AccountController {
                 int checkPassword = checkPass(account.getPassword(), user.get().getPassword());
 
                 if (checkPassword == 1) {
-                    return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+                    return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong Email or Password..."), HttpStatus.OK);
                 }
             }
         } catch (NoSuchElementException exception) {
-            System.out.println("What is this?");
+            System.out.println("NULL");
 
             return new ResponseEntity<ProjectStatus>(new ProjectStatus("Wrong Email or Password..."), HttpStatus.OK);
         }
@@ -129,6 +129,6 @@ public class AccountController {
     ResponseEntity<ProjectStatus> updateAccById(@PathVariable(value = "id") String id, @Valid @RequestBody Account user ) {
         user.setId(id);
         accountService.updateById(user);
-        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success..."), HttpStatus.OK);
+        return new ResponseEntity<ProjectStatus>(new ProjectStatus("Success"), HttpStatus.OK);
     }
 }
