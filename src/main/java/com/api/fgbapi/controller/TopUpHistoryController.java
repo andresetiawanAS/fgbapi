@@ -28,6 +28,7 @@ public class TopUpHistoryController implements Serializable {
     @Autowired
     BalanceService balanceService;
 
+    @GetMapping(value = "/all")
     public List<TopUpHistory> getAll(){
         return topUpHistoryService.findAll();
     }
