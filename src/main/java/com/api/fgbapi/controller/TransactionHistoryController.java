@@ -27,6 +27,7 @@ public class TransactionHistoryController {
     @Autowired
     BalanceService balanceService;
 
+    @GetMapping("/all")
     public List<TransactionHistory> getAll(){
         return transactionHistoryService.findAll();
     }
